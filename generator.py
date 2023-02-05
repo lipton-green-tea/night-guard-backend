@@ -36,25 +36,24 @@ def generate_random_body_temperature_data(start_time, end_time, num_samples):
     data["metadata"] = {"start_time": start_time.strftime('%Y-%m-%dT%H:%M:%S.%f+00:00'), "end_time": end_time.strftime('%Y-%m-%dT%H:%M:%S.%f+00:00')}
     return data
 
+def temp_and_pressure_generator(num_samples):
 
+  #year month day hour minute second microsecond
+  start_time = datetime.datetime(2023, 2, 4, 12, 1, 46, 223625)
+  end_time = datetime.datetime(2023, 2, 4, 19, 12, 46, 223625)
+  body_temperature_data = generate_random_body_temperature_data(start_time, end_time, num_samples)
+  bloodpressure= generate_blood_pressure_data(start_time, end_time, num_samples)
+  result = {
+    "type": "body",
+    "user": {
+      "scopes": None,
+      "last_webhook_update": None,
+      "provider": "GOOGLE",
+      "reference_id": None,
+      "user_id": str(uuid.uuid1())
+    },
+    "data": [body_temperature_data,bloodpressure],
+    "version": "2022-03-16"
+  }
 
-#year month day hour minute second microsecond
-start_time = datetime.datetime(2023, 2, 4, 12, 1, 46, 223625)
-end_time = datetime.datetime(2023, 2, 4, 19, 12, 46, 223625)
-num_samples = 60
-body_temperature_data = generate_random_body_temperature_data(start_time, end_time, num_samples)
-bloodpressure= generate_blood_pressure_data(start_time, end_time, num_samples)
-result = {
-  "type": "body",
-  "user": {
-    "scopes": None,
-    "last_webhook_update": None,
-    "provider": "GOOGLE",
-    "reference_id": None,
-    "user_id": str(uuid.uuid1())
-  },
-  "data": [body_temperature_data,bloodpressure],
-  "version": "2022-03-16"
-}
-
-print(result)
+  return (result)
