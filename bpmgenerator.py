@@ -17,7 +17,7 @@ def update_hr_summary(samples):
 
 def getbpm(num_samples):
     start = datetime.now()
-    end = start + timedelta(days=1)
+    end = start + timedelta(hours=7)
     num_samples = 10
 
     hr_samples = generate_random_bpm(start, end, num_samples)
