@@ -7,7 +7,7 @@ Parameters= {"Diastolic BP":14,"Systolic BP":19.6,"Body Temp":0.5,"Heart rate":7
 #%%
 n=12
 bpm=bpmgenerator.getbpm(n,0.2)
-tempandbp=generator.temp_and_pressure_generator(n,systolicvar=10,diastolicvar=7,tempvar=0.25)
+tempandbp=generator.temp_and_pressure_generator(n,10,7,0.25)
 
 Alcohol=True
 Drugs= False
