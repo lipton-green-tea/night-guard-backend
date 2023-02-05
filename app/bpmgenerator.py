@@ -1,11 +1,12 @@
 import random
 from datetime import datetime, timedelta
+import numpy as np
 
 def generate_random_bpm(start, end, num_samples):
     date_range = end - start
     date_list = [start + timedelta(days=x) for x in range(0, date_range.days + 1)]
-    #generate random bpms
-    samples = [{"bpm": random.randint(60, 200), "timestamp": (start + timedelta(seconds=random.randint(0, date_range.total_seconds()))).isoformat()} for i in range(num_samples)]
+    #generate random bpm with normal dist
+    samples = [{"bpm": np.random.normal(65, 7), "timestamp": (start + timedelta(seconds=random.randint(0, date_range.total_seconds()))).isoformat()} for i in range(num_samples)]
     return samples
 
 def update_hr_summary(samples):
