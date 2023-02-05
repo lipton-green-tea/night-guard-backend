@@ -1,5 +1,6 @@
 from flask import Flask, request
 from tinydb import TinyDB, Query
+import random
 
 # import drugchecker
 
@@ -196,8 +197,8 @@ def get_data():
 
         return f"{int(body_temp)},{int(heart_rate)},{int(systol_blood_pressure)},{detected}"
 
-    default_body_temp = 36.619758391275916
-    default_heart_rate = 82
-    default_blood_pressure = 114.4312786866055
+    default_body_temp = 36.619758391275916 
+    default_heart_rate = 82 + random.uniform(1, 1)
+    default_blood_pressure = 114.4312786866055 + random.uniform(2,2)
 
     return f"{int(default_body_temp)},{int(default_heart_rate)},{int(default_blood_pressure)},{0}"
