@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 Parameters= {"Diastolic BP":14,"Systolic BP":19.6,"Body Temp":0.5,"Heart rate":7}
 #%%
 n=12
-bpm=bpmgenerator.getbpm(n)
-tempandbp=generator.temp_and_pressure_generator(n)
+bpm=bpmgenerator.getbpm(n,0.2)
+tempandbp=generator.temp_and_pressure_generator(n,systolicvar=10,diastolicvar=7,tempvar=0.25)
 
 Alcohol=True
 Drugs= False
@@ -23,15 +23,14 @@ diastolic_bp_values = [
 ]
 #list of all systolic bp values
 systolic_bp_values = [
-    sample['diastolic_bp'] for data in tempandbp['data'] 
+    sample['systolic_bp'] for data in tempandbp['data'] 
     for sample in data.get('blood_pressure_samples', [])
 ]
+#%% Plot diff variation graphs
+plt.plot(temp)
 #%%
 #list of all temp values
-temp_values = [
-    sample['temperature_celsius'] for data in tempandbp['data'] 
-    for sample in data.get('body_temperature_samples', [])
-]
+temp_values = [x['temperature_celsius'] for x in tempandbp['data'][0]['temperature_data']['body_temperature_samples']]
 # %%
 
 def Spiked(Alcohol,Drugs,n):
@@ -41,23 +40,7 @@ def Spiked(Alcohol,Drugs,n):
     sysstddev= Parameters.get("Systolic BP")
     count=0
     basevals=[diastolic_bp_values[0],systolic_bp_values[0],bpm_values[0],temp_values[0]]
-    if Alcohol is True:
-        for i in range(1,n):
-            if abs(diastolic_bp_values[i]- (basevals[0])) > diastddev:
-                count+=1
-                break
-        for i in range(1,n):
-            if abs(systolic_bp_values[i]- (basevals[0])) > sysstddev:
-                count+=1
-                break
-        for i in range(1,n):
-            if abs(bpm_values[i]- (basevals[0])) > 2*bpmstddev:
-                count+=0.5
-                break
-        for i in range(1,n):
-            if abs(temp_values[i]- (basevals[0])) > tempstddev:
-                count+=0.5
-    elif Alcohol is False and Drugs is True:
+    if Alcohol is True or Drugs is True:
         for i in range(1,n):
             if abs(diastolic_bp_values[i]- (basevals[0])) > diastddev:
                 count+=1
@@ -87,7 +70,7 @@ def Spiked(Alcohol,Drugs,n):
                 count+=0.5
                 break
         for i in range(1,n):
-            if abs(temp_values[i]- (basevals[0])) > tempstddev:
+            if abs(temp_values[i]- (basevals[0])) > 2*tempstddev:
                 count+=0.5
     if count>=2:
         return True
@@ -96,3 +79,5 @@ def Spiked(Alcohol,Drugs,n):
 
 Spiked(Alcohol,Drugs,n)
 
+
+# %%
