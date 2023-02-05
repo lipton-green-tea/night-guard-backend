@@ -22,6 +22,8 @@ def generate_random_body_temperature_data(start_time, end_time, num_samples):
     data["metadata"] = {"start_time": start_time.strftime('%Y-%m-%dT%H:%M:%S.%f+00:00'), "end_time": end_time.strftime('%Y-%m-%dT%H:%M:%S.%f+00:00')}
     return data
 
+
+
 #year month day hour minute second microsecond
 start_time = datetime.datetime(2023, 2, 4, 12, 1, 46, 223625)
 end_time = datetime.datetime(2023, 2, 4, 19, 12, 46, 223625)
