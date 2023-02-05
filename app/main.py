@@ -196,23 +196,8 @@ def get_data():
 
         return f"{body_temp},{heart_rate},{systol_blood_pressure},{detected}"
 
-#     default_body_temp = 38
-#     default_heart_rate = 89
-#     default_blood_pressure = 112
+    default_body_temp = 36.619758391275916
+    default_heart_rate = 82
+    default_blood_pressure = 114.4312786866055
 
-#     impulse_body_temp = [37.65, 36.995, 36.678, 37.0, 36.73, 37.73, 37.77, 37.50, 36.84, 37.34, 37.36, 36.43]
-#     impulse_heart_rate = [
-#         52.88,
-#         71.97,
-#         63.46,
-#         76.11,
-#         68.87,
-#         64.18,
-#         57.01,
-#         66.40,
-#         74.80,
-#         67.91]
-#  # [52.88, 71.97, 63.47, 76.12, 68.08, 64.18, 57.02, 66.40, 74.81, 67.92]
-#     impulse_blood_pressure = []
-
-    return f"{default_body_temp}deg @ {default_heart_rate}bpm, {default_blood_pressure}psi"
+    return f"{default_body_temp},{default_heart_rate},{default_blood_pressure},{0}"
