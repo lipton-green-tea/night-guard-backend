@@ -1,6 +1,7 @@
 import random
 import datetime
 import uuid
+import numpy.random
 
 def generate_random_body_temperature_sample(start_time, end_time):
     sample = {}
@@ -8,7 +9,7 @@ def generate_random_body_temperature_sample(start_time, end_time):
         random.uniform(start_time, end_time),
         '%Y-%m-%dT%H:%M:%S.%f+00:00'
     )
-    sample["temperature_celsius"] = random.normal(37.0, .5)
+    sample["temperature_celsius"] = numpy.random.normal(37.0, .5)
     return sample
 
 def generate_random_blood_pressure_sample(start_time, end_time):
@@ -18,8 +19,8 @@ def generate_random_blood_pressure_sample(start_time, end_time):
         '%Y-%m-%dT%H:%M:%S.%f+00:00'
     )
     #Normally distributed bp
-    sample["systolic_bp"] = random.normal(128.4, 19.6)
-    sample["diastolic_bp"] = random.normal(90, 14)
+    sample["systolic_bp"] = numpy.random.normal(128.4, 19.6)
+    sample["diastolic_bp"] = numpy.random.normal(90, 14)
     return sample
 
 def generate_body_temperature_data(start_time, end_time, num_samples):
